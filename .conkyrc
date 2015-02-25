@@ -1,0 +1,93 @@
+alignment top_right
+background yes
+cpu_avg_samples 5
+net_avg_samples 5
+out_to_console no
+own_window_transparent yes
+update_interval 2
+own_window no
+double_buffer yes
+minimum_size 5 5
+draw_shades yes
+draw_outline no
+draw_borders yes
+stippled_borders 0
+border_width 2
+default_color white
+default_outline_color white
+default_shade_color black
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+gap_x 20
+gap_y 20 
+minimum_size 5 300
+maximum_width 300
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+own_window yes
+own_window_class Conky
+own_window_transparent yes
+own_window_type desktop
+stippled_borders 0
+uppercase no
+use_spacer right
+mpd_host 0.0.0.0
+mpd_port 6600
+use_xft yes
+xftfont Monospace:size=8
+
+color1 1793D1
+color2 FFFFFF
+color3 FFFFFF
+color4 2284F2
+
+TEXT
+${font Monospace:bold:size=18}${color1}${alignc}$nodename
+${font size=12}${color1}SYSTEM ${hr 2}{$font}
+
+${color1}Kernel: ${color2}$kernel${color1}${alignr}Uptime: ${color2}$uptime
+
+${color1}CPU 1 : ${color2}$freq MHz${alignr}${cpu cpu1}%
+${color4}${cpugraph cpu1 30,300 FFFFFF 1793D1 -t}
+
+${color1}CPU 2 : ${color2}$freq MHz${alignr}${cpu cpu2}%
+${color4}${cpugraph cpu2 30,300 FFFFFF 1793D1 -t}
+
+${color1}RAM   : ${color2}$mem  $memperc% ${alignr}${color1}${membar 6,150}
+
+${font size=12}${color1}DISK ${hr 2}{$font}
+
+${color1}/     : ${color2}${fs_size /}  ${fs_used_perc /}% ${alignr}${color1}${fs_bar 6,150 /}
+${color1}/home : ${color2}${fs_size /home}  ${fs_used_perc /home}% ${alignr}${color1}${fs_bar 6,150 /home}
+
+${font size=12}${color1}PROCESSES ${hr 2}{$font}
+
+${color1}Processes: ${color2}$processes${alignr}${color1}Running: ${color2}$running_processes
+
+${color1}CPU Usage${alignr}PID    CPU %   MEM % $color
+  ${top name 1}${alignr}${top pid 1}  ${top cpu 1}  ${top mem 1}
+  ${top name 2}${alignr}${top pid 2}  ${top cpu 2}  ${top mem 2}
+  ${top name 3}${alignr}${top pid 3}  ${top cpu 3}  ${top mem 3}
+${color1}Memory Usage$color
+  ${top_mem name 1}${alignr}${top_mem pid 1}  ${top_mem cpu 1}  ${top_mem mem 1}
+  ${top_mem name 2}${alignr}${top_mem pid 2}  ${top_mem cpu 2}  ${top_mem mem 2}
+  ${top_mem name 3}${alignr}${top_mem pid 3}  ${top_mem cpu 3}  ${top_mem mem 3}
+
+${font size=12}${color1}NETWORK ${hr 2}{$font}
+
+${color1}Local IP  : ${color2}${addr enp0s3}
+${color1}Public IP : ${color2}${texeci 1800 ~/.scripts/externalIp.sh}
+
+${color1}Down : ${color2}${downspeed enp0s3}/s${color2}${alignr}Total : ${color3}${totaldown enp0s3}
+${color1}${downspeedgraph enp0s3 30,300 FF0000 FF0000}
+${color1}Up   : ${color2}${upspeed enp0s3}/s${color2}${alignr}Total : ${color3}${totalup enp0s3}
+${color4}${upspeedgraph enp0s3 30,300 00FF00 00FF00}$color
+
+${font size=12}${color1}UPDATES ${hr 2}{$font}
+
+${texeci 1800 ~/upgrade_check.sh}
